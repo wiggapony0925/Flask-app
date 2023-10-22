@@ -7,6 +7,7 @@ class User(db.model, UserMixin):
    password = db.Colum(db.String(40), nullable=False)
    budget = db.Colum(db.Integer, nullable=False)
    
+   vendind_machines = db.relationship("VendingMachine", backref='owner', lazy=True)
    
 class VendingMachine(db.model):
     pass 
