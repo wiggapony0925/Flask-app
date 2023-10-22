@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, redirect, render_template, request, flash, url_for
 import re
+from werkzeug import generate_password_hash, check_password_hash
+from .models import User, db
 
 auth = Blueprint('auth', __name__)
 
@@ -51,8 +53,12 @@ def sign_up():
 
         if not error_messages:
             # All validation checks passed, proceed to add the user to the database
-            # Add your code to add the user to the database here
-            # ...
+            new_user = User(email=email, firstName=firstName, password=generate_password_hash(
+                password1, method='sha256'))
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Account created!', category='success')
+            return redirect(url_for('views.home'))
 
             flash("Registration successful", category='success')
         
