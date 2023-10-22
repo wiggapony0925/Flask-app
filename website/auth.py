@@ -60,7 +60,7 @@ def sign_up():
         else:
     
             hashed_password = generate_password_hash(password1, method='sha256')
-            new_user = User(email=email, firstName=firstName, password=hashed_password, personal_budget=0)
+            new_user = User(email=email, firstName=firstName, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully', category='success')
