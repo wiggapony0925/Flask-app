@@ -1,5 +1,40 @@
-{% extends "base.html" %} {% block title %}Changed{% endblock %}
+{% extends "base.html" %}
 
-{%block content%}
-<h1> this is the home page </h1>
+{% block title %}
+  Dashboard
+{% endblock %}
+
+{% block content %}
+  <h1>Welcome, {{ current_user.firstName }}</h1>
+
+  <div class="dashboard-header">
+    <a href="{{ url_for('auth.sign_up') }}" class="btn btn-success btn-add">
+      <i class="fas fa-plus"></i> <!-- Plus icon -->
+    </a>
+  </div>
+
+  <h2>Your Vending Machines</h2>
+
+  <div class="vending-machine-list">
+    {% if user.vending_machines %}
+      {% for machine in user.vending_machines %}
+        <div class="vending-machine">
+          <h3>{{ machine.name }}</h3>
+          <p>Location: {{ machine.location }}</p>
+          <p>Capacity: {{ machine.capacity }}</p>
+          <p>Total Sales: ${{ machine.total_sales }}</p>
+
+          <a href="{{ url_for('vending_machine_dashboard', machine_id=machine.id) }}" class="btn btn-primary">View Dashboard</a>
+
+          <form method="POST" action="{{ url_for('auth.sign_up', machine_id=machine.id) }}" class="delete-form">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>You don't have any vending machines yet.</p>
+    {% endif %}
+  </div>
+
+  <button class="btn btn-secondary btn-select" {% if not user.vending_machines %}disabled{% endif %}>Select</button>
 {% endblock %}
