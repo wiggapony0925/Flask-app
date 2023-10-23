@@ -25,7 +25,7 @@
                   <p>Location: {{ machine.location }}</p>
                   <p>Budget: ${{ machine.budget }}</p>
                   <p>Total Sales: ${{ machine.calculate_total_sales() }}</p>
-                  <a href="{{ url_for('vending_machine.vending_machine_dashboard', machine_id=machine.id) }}" class="btn btn-primary">View Dashboard</a>
+                  <a href="{{ url_for('vending_machine_bp.vending_machine_dashboard', machine_id=machine.id) }}" class="btn btn-primary">View Dashboard</a>
                   <form method="POST" action="{{ url_for('views.delete_vending_machine', vending_machine_id=machine.id) }}" class="delete-form mt-4">
                     <button type="submit" class="btn btn-danger">Delete</button>
                   </form>

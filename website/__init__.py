@@ -20,12 +20,12 @@ def create_app():
 
     from .views import views
     from .auth import auth
-    from .vending_Machine import vending_machine
+    from .vending_Machine import vending_machine_bp 
     
     # Register blueprints with distinct URL prefixes
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-    app.register_blueprint(vending_machine, url_prefix='/')
+    app.register_blueprint(vending_machine_bp , url_prefix='/')
 
     from .models import User, Note, VendingMachine
 
