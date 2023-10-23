@@ -10,8 +10,6 @@ load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DB_NAME = os.getenv("DB_NAME")
-
-
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = SECRET_KEY
@@ -22,9 +20,12 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .vending_Machine import Vending_Machine 
 
+    # Register blueprints with distinct URL prefixes
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(Vending_Machine, url_prefix='/')
 
     from .models import User, Note, VendingMachine
 
@@ -40,7 +41,6 @@ def create_app():
         return User.query.get(int(id))
 
     return app
-
 
 # Define the create_database function to create the database
 def create_database(app):
