@@ -41,4 +41,8 @@ def create_vending_machine():
         db.commit()
         
         flash(f"sucessfully added {machine_name} to your portfolio !", category='success')
-        return redirect(url_for('views.home'))
+        return redirect(url_for('views.home')) 
+    
+    return render_template("/createMachine.html", title="Create a New Machine", form=VendingMachine())
+
+
