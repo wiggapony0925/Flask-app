@@ -59,6 +59,25 @@ def edit_vending_machine(vending_machine_id):
     if vending_machine is None or vending_machine.user_id != current_user.id:
         flash('Vending machine not found', 'error')
         return redirect(url_for('views.home'))
+    
+    if request.method == "POST":
+        machine_name = request.form.get('machine_name')
+        location = request.form.get('location')
+        budget = float(request.form.get('budget'))
+        date = request.form.get('date')
+
+        # Update the vending machine's attributes
+        vending_machine.machine_name = machine_name
+        vending_machine.location = location
+        vending_machine.budget = budget
+        vending_machine.date = date
+        
+        db.session.commit()
+
+        flash('Vending machine settings updated successfully', 'success')
+        return redirect(url_for('views.home'))
+
+    return render_template("edit_vending_machine.html", vending_machine=vending_machine)
 
 
 
