@@ -11,9 +11,11 @@
       <div class="card shadow-lg rounded">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center"> 
           <h1 class="mb-0">Welcome, {{ current_user.firstName }}</h1>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMachineModal">
-            <i class="fas fa-plus"></i> Add Vending Machine
-          </button>
+          <div class="action-buttons">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMachineModal">
+              <i class="fas fa-plus"></i> Add Vending Machine
+            </button>
+          </div>
         </div>
         <div class="card-body">
           <h2 class="mt-4">Your Vending Machines</h2>
@@ -27,20 +29,27 @@
                   <p>Total Sales: ${{ machine.calculate_total_sales() }}</p>
                   <a href="{{ url_for('vending_machine_bp.vending_machine_dashboard', machine_id=machine.id) }}" class="btn btn-primary">View Dashboard</a>
                   <form method="POST" action="{{ url_for('views.delete_vending_machine', vending_machine_id=machine.id) }}" class="delete-form mt-4">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                  </form>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <form method='POST' action="{{ url_for('views.edit_vending_machine', vending_machine_id=machine.id) }}" class="edit-form"> 
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </form>
+                    </div>
+                </form> 
                 </div>
               {% endfor %}
             {% else %}
               <p>You don't have any vending machines yet.</p>
             {% endif %}
           </div>
-          <button class="btn btn-secondary btn-select btn-lg" {% if not user.vending_machines %}disabled{% endif %}>Select</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="modal fade" id="addMachineModal" tabindex="-1" aria-labelledby="addMachineModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
