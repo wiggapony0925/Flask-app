@@ -8,31 +8,25 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card">
-        <div class="card-header bg-dark text-white"> 
+      <div class="card shadow-lg rounded">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center"> 
           <h1 class="mb-0">Welcome, {{ current_user.firstName }}</h1>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMachineModal">
+            <i class="fas fa-plus"></i> Add Vending Machine
+          </button>
         </div>
         <div class="card-body">
-          <div class="dashboard-header">
-            <button id="add-machine-button" class="btn btn-success btn-add">
-              <i class="fas fa-plus"></i> Add Vending Machine
-            </button>
-          </div>
-
-          <h2>Your Vending Machines</h2>
-
+          <h2 class="mt-4">Your Vending Machines</h2>
           <div class="vending-machine-list">
             {% if user.vending_machines %}
               {% for machine in user.vending_machines %}
-                <div class="vending-machine">
+                <div class="vending-machine card mb-3 p-3">
                   <h3>{{ machine.machine_name }}</h3>
                   <p>Location: {{ machine.location }}</p>
                   <p>Budget: ${{ machine.budget }}</p>
                   <p>Total Sales: ${{ machine.calculate_total_sales() }}</p>
-
                   <a href="{{ url_for('vending_machine.vending_machine_dashboard', machine_id=machine.id) }}" class="btn btn-primary">View Dashboard</a>
-
-                  <form method="POST" action="{{ url_for('views.delete_vending_machine', vending_machine_id=machine.id) }}" class="delete-form">
+                  <form method="POST" action="{{ url_for('views.delete_vending_machine', vending_machine_id=machine.id) }}" class="delete-form mt-4">
                     <button type="submit" class="btn btn-danger">Delete</button>
                   </form>
                 </div>
@@ -41,15 +35,13 @@
               <p>You don't have any vending machines yet.</p>
             {% endif %}
           </div>
-
-          <button class="btn btn-secondary btn-select" {% if not user.vending_machines %}disabled{% endif %}>Select</button>
+          <button class="btn btn-secondary btn-select btn-lg" {% if not user.vending_machines %}disabled{% endif %}>Select</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Add Vending Machine Form Modal -->
 <div class="modal fade" id="addMachineModal" tabindex="-1" aria-labelledby="addMachineModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -77,18 +69,11 @@
             <label for="budget">Budget</label>
             <input type="number" class="form-control" id="budget" name="budget" placeholder="Enter budget" required>
           </div>
-          <button type="submit" class="btn btn-success">Create</button>
+          <button type="submit" class="btn btn-success btn-lg">Create</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  // Show the Add Machine Form Modal when the button is clicked
-  document.getElementById('add-machine-button').addEventListener('click', function() {
-    $('#addMachineModal').modal('show');
-  });
-</script>
 
 {% endblock %}
