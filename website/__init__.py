@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -20,12 +20,12 @@ def create_app():
 
     from .views import views
     from .auth import auth
-    from .vending_Machine import Vending_Machine 
-
+    from .vending_Machine import vending_machine
+    
     # Register blueprints with distinct URL prefixes
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-    app.register_blueprint(Vending_Machine, url_prefix='/')
+    app.register_blueprint(vending_machine, url_prefix='/')
 
     from .models import User, Note, VendingMachine
 
