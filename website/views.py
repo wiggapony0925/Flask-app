@@ -89,6 +89,17 @@ def edit_vending_machine(vending_machine_id):
 @views.route('/delete_vending_machine/<int:vending_machine_id>', methods=['POST'])
 @login_required
 def delete_vending_machine(vending_machine_id):
-    pass
+    vending_machine = VendingMachine.query.get(vending_machine_id)
+    
+    if vending_machine is None or vending_machine.user_id != current_user.id:
+        flash('Vending machine not found', 'error')
+        return redirect(url_for('views.home'))
+
+    # Delete the vending machine
+    db.session.delete(vending_machine)
+    db.session.commit()
+
+    flash('Vending machine deleted successfully', 'success')
+    return redirect(url_for('views.home'))
 
 
