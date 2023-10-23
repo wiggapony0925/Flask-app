@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<!-- edit_vending_machine.html -->
+<form method="POST" action="{{ url_for('vending_machines.edit_vending_machine', vending_machine_id=vending_machine.id) }}">
+    <label for="machine_name">Machine Name</label>
+    <input type="text" name="machine_name" value="{{ vending_machine.machine_name }}" required>
+
+    <label for="location">Location</label>
+    <input type="text" name="location" value="{{ vending_machine.location }}">
+
+    <label for="budget">Budget</label>
+    <input type="number" name="budget" value="{{ vending_machine.budget }}" required>
+
+    <label for="date">Date</label>
+    <input type="date" name="date" value="{{ vending_machine.date | default('') }}">
+
+    <input type="submit" value="Save Changes">
+</form>
+
+{% endblock %}

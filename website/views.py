@@ -46,3 +46,15 @@ def create_vending_machine():
     return render_template("/createMachine.html", title="Create a New Machine", form=VendingMachine())
 
 
+#edit 
+@vending_machines.route('/edit_vending_machine/<int:vending_machine_id>', methods=['GET', 'POST'])
+@login_required
+def edit_vending_machine():
+    pass
+
+    
+
+
+#delete
+
+
