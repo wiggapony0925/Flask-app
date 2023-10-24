@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Edit Vending Machine{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white"> 
+                <h3 class="mb-0">Edit Vending Machine</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('views.edit_vending_machine', vending_machine_id=vending_machine.id) }}">
+                    <div class="form-group">
+                        <label for="machine_name">Machine Name</label>
+                        <input type="text" class="form-control" id="machine_name" name="machine_name" placeholder="{{ vending_machine.machine_name }}" value="{{ vending_machine.machine_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="{{ vending_machine.location }}" value="{{ vending_machine.location }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Budget</label>
+                        <input type="number" class="form-control" id="budget" name="budget" placeholder="{{ vending_machine.budget }}" value="{{ vending_machine.budget }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" placeholder="{{ vending_machine.date }}" value="{{ vending_machine.date }}" required>
+                    </div>
+                    <br />
+                    <a href="#" class="btn btn-danger" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    <button type="submit" class="btn btn-primary float-right">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+{% endblock %}
+

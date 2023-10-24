@@ -1,0 +1,4 @@
+i last left off fixing the edit controller, due to the fact that when the button is clicked the form under the clicked vending machine id is clicked then it does changes of those 
+
+the error ur getting is 
+
