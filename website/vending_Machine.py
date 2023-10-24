@@ -5,11 +5,18 @@ from .models import Transaction, Note, VendingMachine, db
 vending_machine_bp = Blueprint('vending_machine_bp', __name__)
 
 # Load the HTML under the selected machine
-@vending_machine_bp.route('/vending_machine_dashboard/<int:machine_id>')
+@vending_machine_bp.route('/vending_machine_dashboard/<int:machine_id>', methods=['GET'])
 @login_required
 def vending_machine_dashboard(machine_id):
-    # Your view logic here
-    return render_template("vending_machine_dashboard.html", machine_id=machine_id)
+    vending_machine = VendingMachine.query.get(machine_id)
+    
+    if vending_machine is None or vending_machine.user_id != current_user.id:
+        flash("Vending Machine Not Found", category='error')
+        return redirect(url_for('views.home', user=current_user))
+    
+    return render_template("vending_machine_dashboard.html", vending_machine=vending_machine, user=current_user)
+
+
 
 # Create a note
 @vending_machine_bp.route('/vending_machine_dashboard/<int:id>/notes', methods=['POST', 'GET'])
