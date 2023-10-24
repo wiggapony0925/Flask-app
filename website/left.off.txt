@@ -1,4 +1,13 @@
-i last left off fixing the edit controller, due to the fact that when the button is clicked the form under the clicked vending machine id is clicked then it does changes of those 
+ufinish the routes for the tranactions and find out what data we can collect and add to our db
 
-the error ur getting is 
+create a dashboard template, 
 
+create test for each route  
+
+test 
+
+find a deploytion
+
+add more security 
+
+#add inventory, prucahses, and add a reports 
