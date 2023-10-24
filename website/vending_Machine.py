@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from .models import Transaction, Note, VendingMachine, db
+import json
 
 vending_machine_bp = Blueprint('vending_machine_bp', __name__)
 
@@ -41,10 +42,20 @@ def create_notes(id):
 @vending_machine_bp.route('/vending_machine/<int:machine_id>/notes/<int:note_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_note(machine_id, note_id):
-    pass
+    note = Note.query.filter_by(id=note_id, user_id=current_user, vending_machine_id=id)
+    
+    
 
-# Delete the note
+# Delete the note using json
 @vending_machine_bp.route('/vending_machine/<int:machine_id>/notes/<int:note_id>/delete', methods=['POST'])
 @login_required
 def delete_note(machine_id, note_id):
-    pass
+    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    noteId = note['noteId']
+    note = Note.query.get(noteId)
+    if note:
+        if note.user_id == current_user.id:
+            db.session.delete(note)
+            db.session.commit()
+
+    return jsonify({})    
