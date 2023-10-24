@@ -33,7 +33,7 @@ class VendingMachine(db.Model):
     expenses = db.relationship('Expense', backref='vending_machine', lazy=True)
     products = db.relationship('Product', backref='vending_machine', lazy=True)
     maintenance_logs = db.relationship('MaintenanceLog', backref='vending_machine', lazy=True)
-    feedback = db.relationship('Feedback', backref='vending_machine', lazy=True)
+
 
     def calculate_total_sales(self):
         return sum(tr.amount for tr in self.transactions)
