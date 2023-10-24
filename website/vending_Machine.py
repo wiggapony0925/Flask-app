@@ -42,9 +42,15 @@ def create_notes(id):
 @vending_machine_bp.route('/vending_machine/<int:machine_id>/notes/<int:note_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_note(machine_id, note_id):
-    note = Note.query.filter_by(id=note_id, user_id=current_user, vending_machine_id=id)
+   if request.method == 'POST':
+       edited_note = request.form.get('edited-note')
+       if len(edited_note) < 10:
+          flash("this note is still too short", category='error')
+          
     
     
+    
+
 
 # Delete the note using json
 @vending_machine_bp.route('/vending_machine/<int:machine_id>/notes/<int:note_id>/delete', methods=['POST'])
