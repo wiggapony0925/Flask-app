@@ -18,6 +18,25 @@ def vending_machine_dashboard(machine_id):
     return render_template("vending_machine_dashboard.html", vending_machine=vending_machine, user=current_user)
 
 
+@vending_machine_bp.route('/vending_machine_dashboard/<int:machine_id>/edit_description', methods=['POST', 'GET'])
+@login_required
+def edit_description(machine_id):
+    new_description = request.form.get('description')
+    vending_machine = VendingMachine.query.get(machine_id)
+
+    if vending_machine:
+        if vending_machine.user_id == current_user.id:
+            vending_machine.description = new_description
+            db.session.commit()
+            flash("Description updated successfully", category='success')
+        else:
+            flash("You don't have permission to edit this description", category='error')
+    else:
+        flash("Vending Machine not found", category='error')
+
+    return redirect(url_for('vending_machine_bp.vending_machine_dashboard', machine_id=machine_id))
+
+
 
 # Create a note
 @vending_machine_bp.route('/vending_machine_dashboard/<int:id>/notes', methods=['POST', 'GET'])
