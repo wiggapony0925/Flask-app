@@ -37,6 +37,20 @@ def edit_description(machine_id):
     return redirect(url_for('vending_machine_bp.vending_machine_dashboard', machine_id=machine_id))
 
 
+#add sales
+@vending_machine_bp.route('/vending_machine_dashboard/<int:machine_id>/add_sales', methods=['POST'])
+@login_required
+def add_sales(machine_id):
+    if request.method == 'POST':
+        sale_amount = float(request.form.get('sale_amount'))
+    
+        new_sale = Transaction(amount=sale_amount, vending_machine_id=machine_id)
+        db.session.add(new_sale)
+        db.session.commit()
+        
+        flash('Sale added successfully', 'success')
+        
+    return redirect(url_for('vending_machine_bp.vending_machine_dashboard', machine_id=machine_id))
 
 # Create a note
 @vending_machine_bp.route('/vending_machine_dashboard/<int:id>/notes', methods=['POST', 'GET'])
