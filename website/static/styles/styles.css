@@ -1,0 +1,106 @@
+/* Base Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Bootstrap Customization */
+:root {
+    --primary: #3498db;
+    --secondary: #2c3e50;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: var(--primary);
+    color: #000000;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Helvetica', sans-serif;
+}
+
+/* Interactive Elements */
+.btn {
+    border-radius: 10px;
+}
+
+.btn:hover {
+    filter: brightness(0.9);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 15px;
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+}
+
+/* Form Styling */
+.form-control {
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* Table Styling */
+.table {
+    margin-bottom: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+    border: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.navbar.sticky {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.navbar:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.nav-link, .navbar-brand {
+    color: #fff !important;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link i, .navbar-brand i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: var(--primary) !important;
+}
+
+/* Dropdown Styling */
+.dropdown-menu {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
